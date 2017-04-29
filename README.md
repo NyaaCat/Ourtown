@@ -19,7 +19,7 @@ ourtown is a spigot plugin that manages multiple spawn point. Features:
 | `/town spawn list` | `town.admin` | List all spawnpoints and position |
 | `/town tp [name]` | `town.admin` | Teleport to the specific spawnpoint |
 | `/town select [name] [player]` | `town.admin` | Set a player's spawnpoint to [name] |
-| `/town select [name]` | `town.player.select` | Set a spawnpoint |
+| `/town select [name]` | `town.player.select` | Select spawnpoint |
 | `/town tp` | `town.player.tp` | Teleport to player's spawn |
 
 ### Configuration
