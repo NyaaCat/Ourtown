@@ -41,7 +41,7 @@ ourtown is a spigot plugin that manages multiple spawn point. Features:
   x: 123
   y: 65
   z: 456
-'another-spawn'
+'another-spawn':
   world: world2
   x: 789
   y: 67
