@@ -27,7 +27,7 @@ ourtown is a spigot plugin that manages multiple spawn point. Features:
 `config.yml`
 
 * `mode`
-  * Option `RANDOM` randomly select a spawnpoint on join
+  * Option `RANDOM` randomly select a spawnpoint on join
   * Option `SELECT` prompt player to select a spawnpoint, and teleport to there after selection
 * `force_spawn` `true` to force teleport to player's spawn point at join everytime. `false` to disable
 * `lock_spawn` `true` to lock player spawnpoint after selection or random teleport (only admin may change player's spawnpoint)
