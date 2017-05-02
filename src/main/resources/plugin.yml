@@ -1,0 +1,16 @@
+name: ourtown
+version: 1.0
+main: cat.nyaa.ourtown.ourtown
+depend: [NyaaUtils,Essentials]
+authors: [cylin]
+commands:
+  town:
+permissions:
+  town.player.select:
+    description: Select a spawn point
+    default: true
+  town.player.tp:
+    description: Teleport to spawn point
+    default: true
+  town.admin:
+    default: op
