@@ -1,4 +1,7 @@
-apply plugin: 'java'
+plugins {
+    id 'java'
+    id 'org.inferred.processors' version '1.2.11'
+}
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -35,6 +38,11 @@ repositories {
         name 'nyaa'
         url 'https://raw.githubusercontent.com/NyaaCat/nyaautils/maven-repo'
     }
+
+    maven {
+        name 'nu-langchecker'
+        url 'https://raw.githubusercontent.com/Librazy/NyaaUtilsLangChecker/maven-repo'
+    }
 }
 
 dependencies {
@@ -46,4 +54,11 @@ dependencies {
     compile('cat.nyaa:nyaautils:2.0-SNAPSHOT') {
         transitive = false
     }
+    compile 'org.librazy:NyaaUtilsLangChecker:1.0-SNAPSHOT'
+    processor 'org.librazy:NyaaUtilsLangChecker:1.0-SNAPSHOT'
+    processor 'org.spigotmc:spigot-api:1.11.2-R0.1-SNAPSHOT'
+}
+
+compileJava {
+    options.compilerArgs += ["-Xplugin:NyaaUtilsLangAnnotationProcessor"]
 }
