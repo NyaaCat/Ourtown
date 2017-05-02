@@ -83,7 +83,7 @@ public class CommandHandler extends CommandReceiver<ourtown> {
                         plugin.teleport(offlinePlayer.getPlayer(), plugin.getPlayerSpawn(offlinePlayer));
                     }
                 } else {
-                    msg(sender, "user.info.player_not_found");
+                    msg(sender, "user.info.player_not_found", name);
                 }
             } else if (!plugin.config.lock_spawn || (plugin.config.lock_spawn && !plugin.hasSpawn(asPlayer(sender)))) {
                 Player player = asPlayer(sender);
