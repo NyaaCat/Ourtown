@@ -1,0 +1,59 @@
+internal:
+  info:
+    using_language: "Now using language: %s"
+    command_complete: "Command Executed!"
+    usage_prompt: "Usage: %s"
+user:
+  teleport: "teleported to %s"
+  select:
+    set: "set your spawn point to %s"
+    select: "please use &b/town select&r to select your spawn point"
+    gui:
+      title: "Select your spawn point"
+      item:
+        name: "&b%s"
+        description: "&a%s"
+        click: "&aClick to select"
+  info:
+    player_not_found: "player %s not found"
+    back: "&fBack"
+    next_page: "&fNext Page"
+  spawn:
+    exist: "spawn point %s already exist"
+    not_found: "spawn point %s not found"
+    list:
+      info: "%s: %s (%s %d, %d, %d)"
+    set: "set %s to %s (%d, %d, %d)"
+    add: "added %s (%s %d, %d, %d)"
+    del: "removed %s"
+manual:
+  no_description: "No description"
+  no_usage: "No usage"
+  spawn:
+    add:
+      description: "add a spawn point"
+      usage: "/town add [name] [description]"
+    set:
+      description: "set a spawn point"
+      usage: "/town set [name] [description]"
+    list:
+      description: "List all spawn points"
+      usage: "/town list"
+    del:
+      description: "Delete a spawn point"
+      usage: "/town del [name]"
+  tp:
+    description: "Teleport to your spawn"
+    usage: "/town tp"
+  select:
+    description: "Select your spawn point"
+    usage: "/town select [name]"
+  help:
+    description: "Show help message"
+    usage: "/town [subCommands...] help"
+  save:
+    description: "Save all data to config file"
+    usage: "/town save"
+  reload:
+    description: "Reload config from config file. Unsaved changes will lost"
+    usage: "/town reload"
