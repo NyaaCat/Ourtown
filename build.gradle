@@ -33,10 +33,10 @@ repositories {
         name 'vault-repo'
         url 'http://nexus.hc.to/content/repositories/pub_releases'
     }
-    
+
     maven {
-        name 'nyaa'
-        url 'https://raw.githubusercontent.com/NyaaCat/nyaautils/maven-repo'
+        name 'NyaaCore'
+        url 'https://raw.githubusercontent.com/NyaaCat/NyaaCore/maven-repo'
     }
 
     maven {
@@ -51,14 +51,17 @@ dependencies {
     compile('net.ess3:Essentials:2.13-SNAPSHOT') {
         transitive = false
     }
-    compile('cat.nyaa:nyaautils:2.0-SNAPSHOT') {
+    compile('cat.nyaa:nyaacore:2.0-SNAPSHOT') {
         transitive = false
     }
-    compile 'org.librazy:NyaaUtilsLangChecker:1.0-SNAPSHOT'
     processor 'org.librazy:NyaaUtilsLangChecker:1.0-SNAPSHOT'
-    processor 'org.spigotmc:spigot-api:1.11.2-R0.1-SNAPSHOT'
 }
+
+String nyaaCoreLangDir = System.getenv("NYAACORE_LANG_DIR")
 
 compileJava {
     options.compilerArgs += ["-Xplugin:NyaaUtilsLangAnnotationProcessor"]
+    if (nyaaCoreLangDir != null) {
+        options.compilerArgs += ["-ALANG_DIR_ADDITIONAL_PATH=" + nyaaCoreLangDir]
+    }
 }

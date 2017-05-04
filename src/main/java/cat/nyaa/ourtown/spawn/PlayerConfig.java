@@ -1,8 +1,8 @@
 package cat.nyaa.ourtown.spawn;
 
+import cat.nyaa.nyaacore.configuration.FileConfigure;
+import cat.nyaa.nyaacore.configuration.ISerializable;
 import cat.nyaa.ourtown.ourtown;
-import cat.nyaa.utils.FileConfigure;
-import cat.nyaa.utils.ISerializable;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.plugin.java.JavaPlugin;
 

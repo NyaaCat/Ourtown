@@ -1,12 +1,12 @@
 package cat.nyaa.ourtown;
 
 
+import cat.nyaa.nyaacore.CommandReceiver;
+import cat.nyaa.nyaacore.LanguageRepository;
 import cat.nyaa.ourtown.spawn.SpawnCommands;
 import cat.nyaa.ourtown.spawn.SpawnConfig;
 import cat.nyaa.ourtown.spawn.SpawnGUI;
 import cat.nyaa.ourtown.spawn.SpawnLocation;
-import cat.nyaa.utils.CommandReceiver;
-import cat.nyaa.utils.Internationalization;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
@@ -17,7 +17,7 @@ public class CommandHandler extends CommandReceiver<ourtown> {
     @SubCommand("spawn")
     public SpawnCommands spawnCommands;
 
-    public CommandHandler(ourtown plugin, Internationalization i18n) {
+    public CommandHandler(ourtown plugin, LanguageRepository i18n) {
         super(plugin, i18n);
         this.plugin = plugin;
     }

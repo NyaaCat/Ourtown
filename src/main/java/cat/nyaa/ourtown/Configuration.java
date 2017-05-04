@@ -1,9 +1,9 @@
 package cat.nyaa.ourtown;
 
+import cat.nyaa.nyaacore.configuration.ISerializable;
+import cat.nyaa.nyaacore.configuration.PluginConfigure;
 import cat.nyaa.ourtown.spawn.PlayerConfig;
 import cat.nyaa.ourtown.spawn.SpawnConfig;
-import cat.nyaa.utils.ISerializable;
-import cat.nyaa.utils.PluginConfigure;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.plugin.java.JavaPlugin;

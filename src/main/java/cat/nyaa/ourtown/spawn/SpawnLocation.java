@@ -1,7 +1,7 @@
 package cat.nyaa.ourtown.spawn;
 
 
-import cat.nyaa.utils.ISerializable;
+import cat.nyaa.nyaacore.configuration.ISerializable;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 

@@ -39,7 +39,6 @@ public final class ourtown extends JavaPlugin {
         getCommand("town").setTabCompleter(null);
         HandlerList.unregisterAll(this);
         config.save();
-        i18n.reset();
     }
 
     public void reload() {
@@ -47,7 +46,7 @@ public final class ourtown extends JavaPlugin {
         getCommand("town").setExecutor(null);
         getCommand("town").setTabCompleter(null);
         HandlerList.unregisterAll(this);
-        i18n.reset();
+        i18n.load();
         onEnable();
     }
 
