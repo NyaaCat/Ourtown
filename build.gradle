@@ -28,10 +28,15 @@ repositories {
         name 'ess-repo'
         url 'http://repo.ess3.net/content/groups/essentials'
     }
-    
+
     maven {
         name 'vault-repo'
         url 'http://nexus.hc.to/content/repositories/pub_releases'
+    }
+
+    maven {
+        name 'nyaa'
+        url 'https://raw.githubusercontent.com/NyaaCat/nyaautils/maven-repo'
     }
 
     maven {
@@ -47,7 +52,9 @@ repositories {
 
 dependencies {
     compile 'org.spigotmc:spigot-api:1.11.2-R0.1-SNAPSHOT'
-    compile 'net.milkbowl.vault:VaultAPI:1.6'
+    compile('cat.nyaa:nyaautils:3.0-SNAPSHOT') {
+        transitive = false
+    }
     compile('net.ess3:Essentials:2.13-SNAPSHOT') {
         transitive = false
     }

@@ -60,36 +60,27 @@ public class CommandHandler extends CommandReceiver<ourtown> {
 
     @SubCommand(value = "select", permission = "town.player.select")
     public void commandSelect(CommandSender sender, Arguments args) {
-        if (args.length() == 1 && sender instanceof Player) {
-            if (!plugin.config.lock_spawn || (plugin.config.lock_spawn && !plugin.hasSpawn(asPlayer(sender)))) {
-                Player player = asPlayer(sender);
-                SpawnGUI spawnGUI = new SpawnGUI(this.plugin, player);
-                spawnGUI.openGUI(player, 1);
-                return;
-            }
-        } else {
+        if (args.length() == 3 && sender.hasPermission("town.admin")) {
             String name = args.next();
             SpawnLocation spawnLocation = plugin.config.spawnConfig.spawns.get(name);
             if (spawnLocation == null || (SpawnConfig.DEFAULT.equals(name) && !sender.hasPermission("town.admin"))) {
                 msg(sender, "user.spawn.not_found", name);
                 return;
             }
-            if (args.length() == 3 && sender.hasPermission("town.admin")) {
-                String playerName = args.next();
-                OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(playerName);
-                if (offlinePlayer != null) {
-                    plugin.setPlayerSpawn(offlinePlayer, spawnLocation);
-                    if (offlinePlayer.isOnline() && plugin.hasSpawn(offlinePlayer)) {
-                        plugin.teleport(offlinePlayer.getPlayer(), plugin.getPlayerSpawn(offlinePlayer));
-                    }
-                } else {
-                    msg(sender, "user.info.player_not_found", name);
+            String playerName = args.next();
+            OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(playerName);
+            if (offlinePlayer != null) {
+                plugin.setPlayerSpawn(offlinePlayer, spawnLocation);
+                if (offlinePlayer.isOnline() && plugin.hasSpawn(offlinePlayer)) {
+                    plugin.teleport(offlinePlayer.getPlayer(), plugin.getPlayerSpawn(offlinePlayer));
                 }
-            } else if (!plugin.config.lock_spawn || (plugin.config.lock_spawn && !plugin.hasSpawn(asPlayer(sender)))) {
-                Player player = asPlayer(sender);
-                plugin.setPlayerSpawn(player, spawnLocation);
-                plugin.teleport(player.getPlayer(), plugin.getPlayerSpawn(player));
+            } else {
+                msg(sender, "user.info.player_not_found", name);
             }
+        } else {
+            Player player = asPlayer(sender);
+            SpawnGUI spawnGUI = new SpawnGUI(this.plugin, player);
+            spawnGUI.openGUI(player, 1);
         }
     }
 

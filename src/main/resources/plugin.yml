@@ -1,7 +1,7 @@
 name: ourtown
 version: 1.0
 main: cat.nyaa.ourtown.ourtown
-depend: [NyaaCore,Essentials]
+depend: [NyaaCore,NyaaUtils,Essentials]
 authors: [cylin]
 commands:
   town:

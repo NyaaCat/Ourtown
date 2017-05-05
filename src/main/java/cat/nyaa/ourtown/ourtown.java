@@ -67,6 +67,7 @@ public final class ourtown extends JavaPlugin {
         if (player.isOnline()) {
             Bukkit.getPlayer(player.getUniqueId()).sendMessage(I18n.format("user.select.set", loc.getName()));
         }
+        getLogger().info(I18n.format("log.select", player.getName(), loc.getName()));
     }
 
     public boolean hasSpawn(OfflinePlayer player) {

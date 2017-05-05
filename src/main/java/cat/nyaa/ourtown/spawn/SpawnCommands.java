@@ -3,9 +3,12 @@ package cat.nyaa.ourtown.spawn;
 
 import cat.nyaa.nyaacore.CommandReceiver;
 import cat.nyaa.nyaacore.LanguageRepository;
+import cat.nyaa.ourtown.I18n;
 import cat.nyaa.ourtown.ourtown;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+
+import java.util.UUID;
 
 public class SpawnCommands extends CommandReceiver<ourtown> {
     private ourtown plugin;
@@ -40,6 +43,8 @@ public class SpawnCommands extends CommandReceiver<ourtown> {
         plugin.config.spawnConfig.spawns.put(name, spawn);
         plugin.config.save();
         msg(sender, "user.spawn.set", name, spawn.getWorld(), (int) spawn.getX(), (int) spawn.getY(), (int) spawn.getZ());
+        plugin.getLogger().info(I18n.format("log.set", spawn.getName(), spawn.getDescription(),
+                spawn.getWorld(), spawn.getX(), spawn.getY(), spawn.getZ(), spawn.getYaw(), spawn.getPitch()));
     }
 
     @SubCommand(value = "list", permission = "town.admin")
@@ -72,6 +77,8 @@ public class SpawnCommands extends CommandReceiver<ourtown> {
         plugin.config.spawnConfig.spawns.put(name, spawn);
         plugin.config.save();
         msg(sender, "user.spawn.add", name, spawn.getWorld(), (int) spawn.getX(), (int) spawn.getY(), (int) spawn.getZ());
+        plugin.getLogger().info(I18n.format("log.add", spawn.getName(), spawn.getDescription(),
+                spawn.getWorld(), spawn.getX(), spawn.getY(), spawn.getZ(), spawn.getYaw(), spawn.getPitch()));
     }
 
     @SubCommand(value = "del", permission = "town.admin")
@@ -87,7 +94,30 @@ public class SpawnCommands extends CommandReceiver<ourtown> {
             return;
         }
         plugin.config.spawnConfig.spawns.remove(name);
+        for (UUID uuid : plugin.config.playerConfig.playerSpawn.keySet()) {
+            if (plugin.config.playerConfig.playerSpawn.get(uuid).equals(name)) {
+                plugin.config.playerConfig.playerSpawn.remove(uuid);
+            }
+        }
         plugin.config.save();
         msg(sender, "user.spawn.del", name);
+        plugin.getLogger().info(I18n.format("log.del", spawn.getName(), spawn.getDescription(),
+                spawn.getWorld(), spawn.getX(), spawn.getY(), spawn.getZ(), spawn.getYaw(), spawn.getPitch()));
+    }
+
+    @SubCommand(value = "setdescription", permission = "town.admin")
+    public void delSetDescription(CommandSender sender, Arguments args) {
+        String name = args.next();
+        if (args.length() < 4) {
+            msg(sender, "manual.spawn.setdescription.usage");
+            return;
+        }
+        SpawnLocation spawn = plugin.config.spawnConfig.spawns.get(name);
+        if (spawn == null) {
+            msg(sender, "user.spawn.not_found", name);
+            return;
+        }
+        spawn.setDescription(args.next());
+        plugin.config.save();
     }
 }

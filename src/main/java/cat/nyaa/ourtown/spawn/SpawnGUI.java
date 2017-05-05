@@ -1,6 +1,8 @@
 package cat.nyaa.ourtown.spawn;
 
 
+import cat.nyaa.nyaacore.utils.VaultUtils;
+import cat.nyaa.nyaautils.api.events.HamsterEcoHelperTransactionApiEvent;
 import cat.nyaa.ourtown.I18n;
 import cat.nyaa.ourtown.ourtown;
 import org.bukkit.Bukkit;
@@ -21,12 +23,14 @@ public class SpawnGUI extends SpawnInventoryHolder {
     public static String market_lore_code = ChatColor.translateAlternateColorCodes('&', "&f&f&9&e&c&1&4&a&5&1&1&2&0&7&4&r");
     public int currentPage = 1;
     public HashMap<Integer, String> spawnPoints = new HashMap<>();
+    private SpawnLocation currentSpawn;
     private ourtown plugin;
     private Player player;
 
     public SpawnGUI(ourtown pl, Player player) {
         this.plugin = pl;
         this.player = player;
+        currentSpawn = plugin.getPlayerSpawn(player);
         ArrayList<String> tmp = plugin.config.spawnConfig.getSpawns();
         if (plugin.config.gui_random) {
             Collections.shuffle(tmp);
@@ -103,27 +107,35 @@ public class SpawnGUI extends SpawnInventoryHolder {
         player.closeInventory();
     }
 
-    public boolean clickItem(Player player, int slot, boolean shift) {
-        if (plugin.config.lock_spawn && plugin.hasSpawn(player)) {
-            closeGUI(player);
-            return false;
-        }
+    public void clickItem(Player player, int slot, boolean shift) {
         int itemId = slot;
         if (currentPage > 1) {
             itemId = ((currentPage - 1) * 45) + slot;
         }
         String name = this.spawnPoints.get(itemId);
-        if (name != null) {
+        if (name != null && !name.equals(currentSpawn.getName())) {
             SpawnLocation spawnLocation = plugin.config.spawnConfig.spawns.get(name);
             if (spawnLocation == null || !spawnLocation.isValid()) {
                 this.openGUI(player, 1);
             } else {
+                if (plugin.config.lock_spawn && plugin.hasSpawn(player)) {
+                    if (plugin.config.select_fee > 0) {
+                        if (VaultUtils.withdraw(player, plugin.config.select_fee)) {
+                            HamsterEcoHelperTransactionApiEvent event = new HamsterEcoHelperTransactionApiEvent(plugin.config.select_fee);
+                            plugin.getServer().getPluginManager().callEvent(event);
+                            player.sendMessage(I18n.format("user.select.set_with_fee", plugin.config.select_fee, spawnLocation.getName()));
+                        } else {
+                            player.sendMessage(I18n.format("user.info.no_enough_money"));
+                            return;
+                        }
+                    }
+                }
                 plugin.setPlayerSpawn(player, spawnLocation);
                 plugin.teleport(player, spawnLocation);
                 player.closeInventory();
             }
         }
-        return false;
+        this.closeGUI(player);
     }
 
     public int getCurrentPage() {
@@ -143,10 +155,21 @@ public class SpawnGUI extends SpawnInventoryHolder {
             lore = new ArrayList<>();
         }
         meta.setDisplayName(I18n.format("user.select.gui.item.name", spawnLocation.getName()));
-        lore.add(0, market_lore_code + ChatColor.RESET +
-                I18n.format("user.select.gui.item.description", spawnLocation.getDescription()));
-
-        lore.add(1, I18n.format("user.select.gui.item.click", player.getName()));
+        String[] split = spawnLocation.getDescription().split("\\\\n");
+        for (String s : split) {
+            lore.add(market_lore_code + ChatColor.RESET +
+                    I18n.format("user.select.gui.item.description", ChatColor.translateAlternateColorCodes('&', s)));
+        }
+        if (!currentSpawn.getName().equals(spawnLocation.getName())) {
+            if (plugin.config.lock_spawn && plugin.config.select_fee > 0) {
+                if (plugin.hasSpawn(player)) {
+                    lore.add(I18n.format("user.select.gui.item.fee", plugin.config.select_fee));
+                }
+            }
+            lore.add(I18n.format("user.select.gui.item.click", player.getName()));
+        } else {
+            lore.add(I18n.format("user.select.gui.item.selected"));
+        }
         meta.setLore(lore);
         itemStack.setItemMeta(meta);
         return itemStack;

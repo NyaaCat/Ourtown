@@ -3,21 +3,30 @@ internal:
     using_language: "Now using language: %s"
     command_complete: "Command Executed!"
     usage_prompt: "Usage: %s"
+log:
+  add: "create spawn {spawn: \"%s\", description: \"%s\" world: \"%s\", x: %s, y: %s, z: %s, yaw: %s, pitch: %s}"
+  set: "set spawn {spawn: \"%s\", description: \"%s\" world: \"%s\", x: %s, y: %s, z: %s, yaw: %s, pitch: %s}"
+  del: "remove spawn {spawn: \"%s\", description: \"%s\" world: \"%s\", x: %s, y: %s, z: %s, yaw: %s, pitch: %s}"
+  select: "set player spawn {player: \"%s\", spawn: \"%s\"}"
 user:
   teleport: "teleported to %s"
   select:
     set: "set your spawn point to %s"
+    set_with_fee: "you spend %d to set your spawn point to %s"
     select: "please use &b/town select&r to select your spawn point"
     gui:
       title: "Select your spawn point"
       item:
         name: "&b%s"
         description: "&a%s"
+        fee: "&bFee: %d"
         click: "&aClick to select"
+        selected: "&9Selected"
   info:
     player_not_found: "player %s not found"
     back: "&fBack"
     next_page: "&fNext Page"
+    no_enough_money: "You do not have that much money"
   spawn:
     exist: "spawn point %s already exist"
     not_found: "spawn point %s not found"
@@ -42,6 +51,9 @@ manual:
     del:
       description: "Delete a spawn point"
       usage: "/town del [name]"
+    setdescription:
+      description: "set spawn point description "
+      usage: "/town del [name] [description]"
   tp:
     description: "Teleport to your spawn"
     usage: "/town tp"

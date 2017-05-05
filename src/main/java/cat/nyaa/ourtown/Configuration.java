@@ -31,6 +31,8 @@ public class Configuration extends PluginConfigure {
     public Material gui_item = Material.SIGN;
     @Serializable
     public boolean auto_open_gui = true;
+    @Serializable
+    public int select_fee = 0;
     @StandaloneConfig
     public SpawnConfig spawnConfig;
     @StandaloneConfig
