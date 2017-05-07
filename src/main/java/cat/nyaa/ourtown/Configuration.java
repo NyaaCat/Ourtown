@@ -6,6 +6,7 @@ import cat.nyaa.ourtown.spawn.PlayerConfig;
 import cat.nyaa.ourtown.spawn.SpawnConfig;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.event.EventPriority;
 import org.bukkit.plugin.java.JavaPlugin;
 
 enum SPAWN_MODE {SELECT, RANDOM}
@@ -33,6 +34,10 @@ public class Configuration extends PluginConfigure {
     public boolean auto_open_gui = true;
     @Serializable
     public int select_fee = 0;
+    @Serializable
+    public boolean handle_player_respawn = true;
+    @Serializable
+    public EventPriority respawn_listener_priority = EventPriority.HIGH;
     @StandaloneConfig
     public SpawnConfig spawnConfig;
     @StandaloneConfig

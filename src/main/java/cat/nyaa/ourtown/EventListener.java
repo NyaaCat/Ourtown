@@ -3,13 +3,14 @@ package cat.nyaa.ourtown;
 import cat.nyaa.ourtown.spawn.SpawnGUI;
 import cat.nyaa.ourtown.spawn.SpawnInventoryHolder;
 import cat.nyaa.ourtown.spawn.SpawnLocation;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
-import org.bukkit.event.Listener;
+import org.bukkit.event.*;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerRespawnEvent;
+import org.bukkit.plugin.EventExecutor;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class EventListener implements Listener {
@@ -19,6 +20,28 @@ public class EventListener implements Listener {
     public EventListener(ourtown pl) {
         this.plugin = pl;
         pl.getServer().getPluginManager().registerEvents(this, pl);
+        if (plugin.config.handle_player_respawn) {
+            plugin.getServer().getPluginManager().registerEvent(PlayerRespawnEvent.class, this,
+                    plugin.config.respawn_listener_priority, new EventExecutor() {
+                        @Override
+                        public void execute(Listener listener, Event event) throws EventException {
+                            ((EventListener) listener).onPlayerRespawn((PlayerRespawnEvent) event);
+                        }
+                    }, plugin, true);
+        }
+    }
+
+    public void onPlayerRespawn(PlayerRespawnEvent event) {
+        if (!plugin.config.handle_player_respawn) {
+            return;
+        }
+        Location respawnLocation = event.getRespawnLocation();
+        Location defaultLocation = respawnLocation.getWorld().getSpawnLocation();
+        if (respawnLocation.equals(defaultLocation) || respawnLocation.distance(defaultLocation) <= 2) {
+            SpawnLocation spawn = plugin.getPlayerSpawn(event.getPlayer());
+            event.setRespawnLocation(spawn.getLocation());
+            plugin.getLogger().info(I18n.format("log.respawn", event.getPlayer().getName(), spawn.getName()));
+        }
     }
 
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)

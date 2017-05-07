@@ -8,6 +8,7 @@ log:
   set: "set spawn {spawn: \"%s\", description: \"%s\" world: \"%s\", x: %s, y: %s, z: %s, yaw: %s, pitch: %s}"
   del: "remove spawn {spawn: \"%s\", description: \"%s\" world: \"%s\", x: %s, y: %s, z: %s, yaw: %s, pitch: %s}"
   select: "set player spawn {player: \"%s\", spawn: \"%s\"}"
+  respawn: "player respawn {player: \"%s\", spawn: \"%s\"}"
 user:
   teleport: "teleported to %s"
   select:
