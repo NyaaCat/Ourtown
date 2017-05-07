@@ -25,7 +25,6 @@ public final class OurTown extends JavaPlugin {
         config = new Configuration(this);
         config.load();
         i18n = new I18n(this, this.config.language);
-        i18n.load();
         commandHandler = new CommandHandler(this, this.i18n);
         getCommand("town").setExecutor(commandHandler);
         getCommand("town").setTabCompleter(commandHandler);

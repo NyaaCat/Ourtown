@@ -72,3 +72,16 @@ compileJava {
         options.compilerArgs += ["-ALANG_DIR_ADDITIONAL_PATH=" + nyaaCoreLangDir]
     }
 }
+
+task apiJar(type: Jar, dependsOn: compileJava) {
+    baseName = 'ourtown-api'
+    includeEmptyDirs = false
+    from sourceSets.main.output.classesDir
+    include('**/cat/nyaa/ourtown/api/')
+}
+
+jar{
+    doLast{
+        apiJar.execute()
+    }
+}
