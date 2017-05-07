@@ -2,7 +2,7 @@ package cat.nyaa.ourtown.spawn;
 
 import cat.nyaa.nyaacore.configuration.FileConfigure;
 import cat.nyaa.nyaacore.configuration.ISerializable;
-import cat.nyaa.ourtown.ourtown;
+import cat.nyaa.ourtown.OurTown;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -11,9 +11,9 @@ import java.util.UUID;
 
 public class PlayerConfig extends FileConfigure {
     public HashMap<UUID, String> playerSpawn = new HashMap<>();
-    private ourtown plugin;
+    private OurTown plugin;
 
-    public PlayerConfig(ourtown pl) {
+    public PlayerConfig(OurTown pl) {
         this.plugin = pl;
     }
 

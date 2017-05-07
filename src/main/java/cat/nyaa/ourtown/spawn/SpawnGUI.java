@@ -4,7 +4,7 @@ package cat.nyaa.ourtown.spawn;
 import cat.nyaa.nyaacore.utils.VaultUtils;
 import cat.nyaa.nyaautils.api.events.HamsterEcoHelperTransactionApiEvent;
 import cat.nyaa.ourtown.I18n;
-import cat.nyaa.ourtown.ourtown;
+import cat.nyaa.ourtown.OurTown;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -24,10 +24,10 @@ public class SpawnGUI extends SpawnInventoryHolder {
     public int currentPage = 1;
     public HashMap<Integer, String> spawnPoints = new HashMap<>();
     private SpawnLocation currentSpawn;
-    private ourtown plugin;
+    private OurTown plugin;
     private Player player;
 
-    public SpawnGUI(ourtown pl, Player player) {
+    public SpawnGUI(OurTown pl, Player player) {
         this.plugin = pl;
         this.player = player;
         currentSpawn = plugin.getPlayerSpawn(player);

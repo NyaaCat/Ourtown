@@ -12,7 +12,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 enum SPAWN_MODE {SELECT, RANDOM}
 
 public class Configuration extends PluginConfigure {
-    private final ourtown plugin;
+    private final OurTown plugin;
 
     @Serializable
     public String language = "en_US";
@@ -43,7 +43,7 @@ public class Configuration extends PluginConfigure {
     @StandaloneConfig
     public PlayerConfig playerConfig;
 
-    public Configuration(ourtown plugin) {
+    public Configuration(OurTown plugin) {
         this.plugin = plugin;
         spawnConfig = new SpawnConfig(plugin);
         playerConfig = new PlayerConfig(plugin);

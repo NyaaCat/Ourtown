@@ -4,18 +4,18 @@ package cat.nyaa.ourtown.spawn;
 import cat.nyaa.nyaacore.CommandReceiver;
 import cat.nyaa.nyaacore.LanguageRepository;
 import cat.nyaa.ourtown.I18n;
-import cat.nyaa.ourtown.ourtown;
+import cat.nyaa.ourtown.OurTown;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.util.UUID;
 
-public class SpawnCommands extends CommandReceiver<ourtown> {
-    private ourtown plugin;
+public class SpawnCommands extends CommandReceiver<OurTown> {
+    private OurTown plugin;
 
     public SpawnCommands(Object plugin, LanguageRepository i18n) {
-        super((ourtown) plugin, i18n);
-        this.plugin = (ourtown) plugin;
+        super((OurTown) plugin, i18n);
+        this.plugin = (OurTown) plugin;
     }
 
     @Override

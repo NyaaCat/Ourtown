@@ -15,9 +15,9 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 public class EventListener implements Listener {
 
-    private ourtown plugin = null;
+    private OurTown plugin = null;
 
-    public EventListener(ourtown pl) {
+    public EventListener(OurTown pl) {
         this.plugin = pl;
         pl.getServer().getPluginManager().registerEvents(this, pl);
         if (plugin.config.handle_player_respawn) {

@@ -10,7 +10,8 @@ import org.bukkit.event.HandlerList;
 import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public final class ourtown extends JavaPlugin {
+public final class OurTown extends JavaPlugin {
+    public static OurTown instance;
     public Configuration config;
     public I18n i18n;
     public Essentials ess;
@@ -20,6 +21,7 @@ public final class ourtown extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        instance = this;
         config = new Configuration(this);
         config.load();
         i18n = new I18n(this, this.config.language);

@@ -3,7 +3,7 @@ package cat.nyaa.ourtown.spawn;
 
 import cat.nyaa.nyaacore.configuration.FileConfigure;
 import cat.nyaa.nyaacore.configuration.ISerializable;
-import cat.nyaa.ourtown.ourtown;
+import cat.nyaa.ourtown.OurTown;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -15,9 +15,9 @@ import java.util.HashMap;
 public class SpawnConfig extends FileConfigure {
     public static String DEFAULT = "default";
     public HashMap<String, SpawnLocation> spawns = new HashMap<>();
-    private ourtown plugin;
+    private OurTown plugin;
 
-    public SpawnConfig(ourtown pl) {
+    public SpawnConfig(OurTown pl) {
         this.plugin = pl;
     }
 

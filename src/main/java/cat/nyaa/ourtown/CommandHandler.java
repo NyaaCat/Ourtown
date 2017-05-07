@@ -12,12 +12,12 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class CommandHandler extends CommandReceiver<ourtown> {
-    private final ourtown plugin;
+public class CommandHandler extends CommandReceiver<OurTown> {
+    private final OurTown plugin;
     @SubCommand("spawn")
     public SpawnCommands spawnCommands;
 
-    public CommandHandler(ourtown plugin, LanguageRepository i18n) {
+    public CommandHandler(OurTown plugin, LanguageRepository i18n) {
         super(plugin, i18n);
         this.plugin = plugin;
     }
