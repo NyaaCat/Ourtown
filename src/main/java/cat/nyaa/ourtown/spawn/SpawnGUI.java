@@ -113,21 +113,23 @@ public class SpawnGUI extends SpawnInventoryHolder {
             itemId = ((currentPage - 1) * 45) + slot;
         }
         String name = this.spawnPoints.get(itemId);
+        if (plugin.config.lock_spawn && plugin.hasSpawn(player)) {
+            this.closeGUI(player);
+            return;
+        }
         if (name != null && !name.equals(currentSpawn.getName())) {
             SpawnLocation spawnLocation = plugin.config.spawnConfig.spawns.get(name);
             if (spawnLocation == null || !spawnLocation.isValid()) {
                 this.openGUI(player, 1);
             } else {
-                if (plugin.config.lock_spawn && plugin.hasSpawn(player)) {
-                    if (plugin.config.select_fee > 0) {
-                        if (VaultUtils.withdraw(player, plugin.config.select_fee)) {
-                            HamsterEcoHelperTransactionApiEvent event = new HamsterEcoHelperTransactionApiEvent(plugin.config.select_fee);
-                            plugin.getServer().getPluginManager().callEvent(event);
-                            player.sendMessage(I18n.format("user.select.set_with_fee", plugin.config.select_fee, spawnLocation.getName()));
-                        } else {
-                            player.sendMessage(I18n.format("user.info.no_enough_money"));
-                            return;
-                        }
+                if (plugin.hasSpawn(player) && plugin.config.select_fee > 0) {
+                    if (VaultUtils.withdraw(player, plugin.config.select_fee)) {
+                        HamsterEcoHelperTransactionApiEvent event = new HamsterEcoHelperTransactionApiEvent(plugin.config.select_fee);
+                        plugin.getServer().getPluginManager().callEvent(event);
+                        player.sendMessage(I18n.format("user.select.set_with_fee", plugin.config.select_fee, spawnLocation.getName()));
+                    } else {
+                        player.sendMessage(I18n.format("user.info.no_enough_money"));
+                        return;
                     }
                 }
                 plugin.setPlayerSpawn(player, spawnLocation);
@@ -161,7 +163,7 @@ public class SpawnGUI extends SpawnInventoryHolder {
                     I18n.format("user.select.gui.item.description", ChatColor.translateAlternateColorCodes('&', s)));
         }
         if (!currentSpawn.getName().equals(spawnLocation.getName())) {
-            if (plugin.config.lock_spawn && plugin.config.select_fee > 0) {
+            if (!plugin.config.lock_spawn && plugin.config.select_fee > 0) {
                 if (plugin.hasSpawn(player)) {
                     lore.add(I18n.format("user.select.gui.item.fee", plugin.config.select_fee));
                 }

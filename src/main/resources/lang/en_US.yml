@@ -15,6 +15,7 @@ user:
     set: "set your spawn point to %s"
     set_with_fee: "you spend %d to set your spawn point to %s"
     select: "please use &b/town select&r to select your spawn point"
+    lock: "you can not reselect spawn point"
     gui:
       title: "Select your spawn point"
       item:

@@ -77,10 +77,12 @@ public class CommandHandler extends CommandReceiver<OurTown> {
             } else {
                 msg(sender, "user.info.player_not_found", name);
             }
-        } else {
+        } else if (!plugin.config.lock_spawn || !plugin.hasSpawn(asPlayer(sender))) {
             Player player = asPlayer(sender);
             SpawnGUI spawnGUI = new SpawnGUI(this.plugin, player);
             spawnGUI.openGUI(player, 1);
+        } else {
+            msg(sender, "user.select.lock");
         }
     }
 
