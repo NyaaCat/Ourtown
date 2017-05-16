@@ -47,7 +47,6 @@ public final class OurTown extends JavaPlugin {
         getCommand("town").setExecutor(null);
         getCommand("town").setTabCompleter(null);
         HandlerList.unregisterAll(this);
-        i18n.load();
         onEnable();
     }
 

@@ -58,6 +58,7 @@ public class CommandHandler extends CommandReceiver<OurTown> {
         plugin.teleport(player, spawnLocation);
     }
 
+    @SuppressWarnings("deprecation")
     @SubCommand(value = "select", permission = "town.player.select")
     public void commandSelect(CommandSender sender, Arguments args) {
         if (args.length() == 3 && sender.hasPermission("town.admin")) {
