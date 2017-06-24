@@ -51,14 +51,14 @@ repositories {
 }
 
 dependencies {
-    compile 'org.spigotmc:spigot-api:1.11.2-R0.1-SNAPSHOT'
-    compile('cat.nyaa:nyaautils:3.0-SNAPSHOT') {
+    compile 'org.spigotmc:spigot-api:1.12-R0.1-SNAPSHOT'
+    compile('cat.nyaa:nyaautils:4.0-SNAPSHOT') {
         transitive = false
     }
     compile('net.ess3:Essentials:2.13-SNAPSHOT') {
         transitive = false
     }
-    compile('cat.nyaa:nyaacore:2.0-SNAPSHOT') {
+    compile('cat.nyaa:nyaacore:3.0-SNAPSHOT') {
         transitive = false
     }
     processor 'org.librazy:NyaaUtilsLangChecker:1.0-SNAPSHOT'
