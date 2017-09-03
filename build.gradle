@@ -1,6 +1,5 @@
 plugins {
     id 'java'
-    id 'org.inferred.processors' version '1.2.11'
 }
 
 sourceCompatibility = 1.8
@@ -59,21 +58,8 @@ dependencies {
 String nyaaCoreLangDir = System.getenv("NYAACORE_LANG_DIR")
 
 compileJava {
-    options.compilerArgs += ["-Xplugin:NyaaUtilsLangAnnotationProcessor", "-Xlint:deprecation", "-Xlint:unchecked"]
+    options.compilerArgs += ["-Xlint:deprecation", "-Xlint:unchecked"]
     if (nyaaCoreLangDir != null) {
         options.compilerArgs += ["-ALANG_DIR_ADDITIONAL_PATH=" + nyaaCoreLangDir]
-    }
-}
-
-task apiJar(type: Jar, dependsOn: compileJava) {
-    baseName = 'ourtown-api'
-    includeEmptyDirs = false
-    from sourceSets.main.output.classesDir
-    include('**/cat/nyaa/ourtown/api/')
-}
-
-jar{
-    doLast{
-        apiJar.execute()
     }
 }

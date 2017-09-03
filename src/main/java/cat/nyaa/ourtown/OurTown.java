@@ -1,9 +1,11 @@
 package cat.nyaa.ourtown;
 
+import cat.nyaa.nyaacore.utils.IPCUtils;
 import cat.nyaa.ourtown.spawn.SpawnConfig;
 import cat.nyaa.ourtown.spawn.SpawnLocation;
 import com.earth2me.essentials.Essentials;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
@@ -33,6 +35,11 @@ public final class OurTown extends JavaPlugin {
         ess = (Essentials) getServer().getPluginManager().getPlugin("Essentials");
         autoSave = new AutoSave(this);
         hasHEH = getServer().getPluginManager().getPlugin("HamsterEcoHelper") != null;
+        try {
+            IPCUtils.registerMethod("ourtown_get_player_spawn", OurTown.class.getMethod("getPlayerSpawnLocation", OfflinePlayer.class));
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -82,5 +89,10 @@ public final class OurTown extends JavaPlugin {
             return config.spawnConfig.spawns.get(SpawnConfig.DEFAULT);
         }
         return s;
+    }
+
+    public static Location getPlayerSpawnLocation(OfflinePlayer player){
+        if(OurTown.instance == null)return null;
+        return OurTown.instance.getPlayerSpawn(player).getLocation();
     }
 }

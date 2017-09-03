@@ -1,6 +1,5 @@
 package cat.nyaa.ourtown;
 
-
 import cat.nyaa.nyaacore.CommandReceiver;
 import cat.nyaa.nyaacore.LanguageRepository;
 import cat.nyaa.ourtown.spawn.SpawnCommands;
