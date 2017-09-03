@@ -12,7 +12,7 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class CommandHandler extends CommandReceiver<OurTown> {
+public class CommandHandler extends CommandReceiver {
     private final OurTown plugin;
     @SubCommand("spawn")
     public SpawnCommands spawnCommands;

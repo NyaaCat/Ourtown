@@ -1,8 +1,8 @@
 package cat.nyaa.ourtown.spawn;
 
 
+import cat.nyaa.nyaacore.utils.IPCUtils;
 import cat.nyaa.nyaacore.utils.VaultUtils;
-import cat.nyaa.nyaautils.api.events.HamsterEcoHelperTransactionApiEvent;
 import cat.nyaa.ourtown.I18n;
 import cat.nyaa.ourtown.OurTown;
 import org.bukkit.Bukkit;
@@ -124,8 +124,9 @@ public class SpawnGUI extends SpawnInventoryHolder {
             } else {
                 if (plugin.hasSpawn(player) && plugin.config.select_fee > 0) {
                     if (VaultUtils.withdraw(player, plugin.config.select_fee)) {
-                        HamsterEcoHelperTransactionApiEvent event = new HamsterEcoHelperTransactionApiEvent(plugin.config.select_fee);
-                        plugin.getServer().getPluginManager().callEvent(event);
+                        if (OurTown.hasHEH) {
+                            IPCUtils.callMethod("heh_balance_deposit", plugin.config.select_fee);
+                        }
                         player.sendMessage(I18n.format("user.select.set_with_fee", plugin.config.select_fee, spawnLocation.getName()));
                     } else {
                         player.sendMessage(I18n.format("user.info.no_enough_money"));

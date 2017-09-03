@@ -10,7 +10,7 @@ import org.bukkit.entity.Player;
 
 import java.util.UUID;
 
-public class SpawnCommands extends CommandReceiver<OurTown> {
+public class SpawnCommands extends CommandReceiver {
     private OurTown plugin;
 
     public SpawnCommands(Object plugin, LanguageRepository i18n) {

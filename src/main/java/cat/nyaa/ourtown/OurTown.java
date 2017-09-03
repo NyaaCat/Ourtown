@@ -18,6 +18,7 @@ public final class OurTown extends JavaPlugin {
     private CommandHandler commandHandler;
     private EventListener eventListener;
     private AutoSave autoSave;
+    public static boolean hasHEH;
 
     @Override
     public void onEnable() {
@@ -31,6 +32,7 @@ public final class OurTown extends JavaPlugin {
         eventListener = new EventListener(this);
         ess = (Essentials) getServer().getPluginManager().getPlugin("Essentials");
         autoSave = new AutoSave(this);
+        hasHEH = getServer().getPluginManager().getPlugin("HamsterEcoHelper") != null;
     }
 
     @Override
