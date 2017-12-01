@@ -1,7 +1,6 @@
 package cat.nyaa.ourtown.spawn;
 
 
-import cat.nyaa.nyaacore.utils.IPCUtils;
 import cat.nyaa.nyaacore.utils.VaultUtils;
 import cat.nyaa.ourtown.I18n;
 import cat.nyaa.ourtown.OurTown;
@@ -126,8 +125,8 @@ public class SpawnGUI extends SpawnInventoryHolder {
             } else {
                 if (plugin.hasSpawn(player) && plugin.config.select_fee > 0) {
                     if (VaultUtils.withdraw(player, plugin.config.select_fee)) {
-                        if (OurTown.hasHEH) {
-                            IPCUtils.callMethod("heh_balance_deposit", plugin.config.select_fee);
+                        if (plugin.systemBalance != null) {
+                            plugin.systemBalance.deposit(plugin.config.select_fee, plugin);
                         }
                         player.sendMessage(I18n.format("user.select.set_with_fee", plugin.config.select_fee, spawnLocation.getName()));
                     } else {

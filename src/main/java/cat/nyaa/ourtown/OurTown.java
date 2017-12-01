@@ -1,5 +1,8 @@
 package cat.nyaa.ourtown;
 
+import cat.nyaa.nyaacore.component.ComponentNotAvailableException;
+import cat.nyaa.nyaacore.component.ISystemBalance;
+import cat.nyaa.nyaacore.component.NyaaComponent;
 import cat.nyaa.nyaacore.utils.IPCUtils;
 import cat.nyaa.ourtown.spawn.SpawnConfig;
 import cat.nyaa.ourtown.spawn.SpawnLocation;
@@ -20,7 +23,7 @@ public final class OurTown extends JavaPlugin {
     private CommandHandler commandHandler;
     private EventListener eventListener;
     private AutoSave autoSave;
-    public static boolean hasHEH;
+    public ISystemBalance systemBalance;
 
     @Override
     public void onEnable() {
@@ -34,7 +37,11 @@ public final class OurTown extends JavaPlugin {
         eventListener = new EventListener(this);
         ess = (Essentials) getServer().getPluginManager().getPlugin("Essentials");
         autoSave = new AutoSave(this);
-        hasHEH = getServer().getPluginManager().getPlugin("HamsterEcoHelper") != null;
+        try {
+            systemBalance = NyaaComponent.get(ISystemBalance.class);
+        } catch (ComponentNotAvailableException e) {
+            systemBalance = null;
+        }
         try {
             IPCUtils.registerMethod("ourtown_get_player_spawn", OurTown.class.getMethod("getPlayerSpawnLocation", OfflinePlayer.class));
         } catch (NoSuchMethodException e) {
