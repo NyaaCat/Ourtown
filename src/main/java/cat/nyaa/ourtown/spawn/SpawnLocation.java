@@ -22,6 +22,8 @@ public class SpawnLocation implements ISerializable {
     private double yaw = 0;
     @Serializable
     private double pitch = 0;
+    @Serializable
+    private boolean available = true;
 
     public SpawnLocation() {
     }
@@ -111,5 +113,13 @@ public class SpawnLocation implements ISerializable {
         setZ(location.getZ());
         setYaw(location.getYaw());
         setPitch(location.getPitch());
+    }
+
+    public boolean isAvailable() {
+        return available;
+    }
+
+    public void setAvailable(boolean available) {
+        this.available = available;
     }
 }

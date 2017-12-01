@@ -30,14 +30,14 @@ public class SpawnCommands extends CommandReceiver {
             msg(sender, "manual.spawn.set.usage");
             return;
         }
-        String name = args.next();
+        String name = args.nextString();
         SpawnLocation spawn = plugin.config.spawnConfig.spawns.get(name);
         if (spawn == null) {
             msg(sender, "user.spawn.not_found", name);
             return;
         }
         if (args.length() == 4) {
-            spawn.setDescription(args.next());
+            spawn.setDescription(args.nextString());
         }
         spawn.setLocation(player.getLocation());
         plugin.config.spawnConfig.spawns.put(name, spawn);
@@ -51,7 +51,11 @@ public class SpawnCommands extends CommandReceiver {
     public void listSpawn(CommandSender sender, Arguments args) {
         for (String k : plugin.config.spawnConfig.spawns.keySet()) {
             SpawnLocation s = plugin.config.spawnConfig.spawns.get(k);
-            msg(sender, "user.spawn.list.info", s.getName(), s.getDescription(), s.getWorld(), (int) s.getX(), (int) s.getY(), (int) s.getZ());
+            String msg = I18n.format("user.spawn.list.info", s.getName(), s.getDescription(),
+                    s.getWorld(), (int) s.getX(), (int) s.getY(), (int) s.getZ());
+            msg += I18n.format("user.spawn.list.status", s.isAvailable() ?
+                    I18n.format("user.status.available") : I18n.format("user.status.unavailable"));
+            sender.sendMessage(msg);
         }
     }
 
@@ -62,7 +66,7 @@ public class SpawnCommands extends CommandReceiver {
             msg(sender, "manual.spawn.add.usage");
             return;
         }
-        String name = args.next();
+        String name = args.nextString();
         SpawnLocation spawn = plugin.config.spawnConfig.spawns.get(name);
         if (spawn != null) {
             msg(sender, "user.spawn.exist", name);
@@ -72,7 +76,7 @@ public class SpawnCommands extends CommandReceiver {
         spawn.setName(name);
         spawn.setLocation(player.getLocation());
         if (args.length() == 4) {
-            spawn.setDescription(args.next());
+            spawn.setDescription(args.nextString());
         }
         plugin.config.spawnConfig.spawns.put(name, spawn);
         plugin.config.save();
@@ -83,11 +87,11 @@ public class SpawnCommands extends CommandReceiver {
 
     @SubCommand(value = "del", permission = "town.admin")
     public void delSpawn(CommandSender sender, Arguments args) {
-        String name = args.next();
         if (args.length() < 3) {
             msg(sender, "manual.spawn.del.usage");
             return;
         }
+        String name = args.nextString();
         SpawnLocation spawn = plugin.config.spawnConfig.spawns.get(name);
         if (spawn == null) {
             msg(sender, "user.spawn.not_found", name);
@@ -107,17 +111,17 @@ public class SpawnCommands extends CommandReceiver {
 
     @SubCommand(value = "setdescription", permission = "town.admin")
     public void delSetDescription(CommandSender sender, Arguments args) {
-        String name = args.next();
         if (args.length() < 4) {
             msg(sender, "manual.spawn.setdescription.usage");
             return;
         }
+        String name = args.nextString();
         SpawnLocation spawn = plugin.config.spawnConfig.spawns.get(name);
         if (spawn == null) {
             msg(sender, "user.spawn.not_found", name);
             return;
         }
-        spawn.setDescription(args.next());
+        spawn.setDescription(args.nextString());
         plugin.config.save();
     }
 }

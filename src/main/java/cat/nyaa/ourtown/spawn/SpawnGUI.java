@@ -119,8 +119,10 @@ public class SpawnGUI extends SpawnInventoryHolder {
         }
         if (name != null && !name.equals(currentSpawn.getName())) {
             SpawnLocation spawnLocation = plugin.config.spawnConfig.spawns.get(name);
-            if (spawnLocation == null || !spawnLocation.isValid()) {
+            if (spawnLocation == null || !spawnLocation.isValid() || !spawnLocation.isAvailable()) {
                 this.openGUI(player, 1);
+                player.sendMessage(I18n.format("user.select.unavailable"));
+                return;
             } else {
                 if (plugin.hasSpawn(player) && plugin.config.select_fee > 0) {
                     if (VaultUtils.withdraw(player, plugin.config.select_fee)) {
@@ -158,18 +160,25 @@ public class SpawnGUI extends SpawnInventoryHolder {
             lore = new ArrayList<>();
         }
         meta.setDisplayName(I18n.format("user.select.gui.item.name", spawnLocation.getName()));
-        String[] split = spawnLocation.getDescription().split("\\\\n");
-        for (String s : split) {
-            lore.add(market_lore_code + ChatColor.RESET +
-                    I18n.format("user.select.gui.item.description", ChatColor.translateAlternateColorCodes('&', s)));
+        if (spawnLocation.getDescription().length() > 0) {
+            String[] split = spawnLocation.getDescription().split("\\\\n");
+            for (String s : split) {
+                lore.add(market_lore_code + ChatColor.RESET +
+                        I18n.format("user.select.gui.item.description", ChatColor.translateAlternateColorCodes('&', s)));
+            }
+        }
+        if (!spawnLocation.isAvailable()) {
+            lore.add(I18n.format("user.select.gui.item.unavailable"));
         }
         if (!currentSpawn.getName().equals(spawnLocation.getName())) {
-            if (!plugin.config.lock_spawn && plugin.config.select_fee > 0) {
-                if (plugin.hasSpawn(player)) {
-                    lore.add(I18n.format("user.select.gui.item.fee", plugin.config.select_fee));
+            if (spawnLocation.isAvailable()) {
+                if (!plugin.config.lock_spawn && plugin.config.select_fee > 0) {
+                    if (plugin.hasSpawn(player)) {
+                        lore.add(I18n.format("user.select.gui.item.fee", plugin.config.select_fee));
+                    }
                 }
+                lore.add(I18n.format("user.select.gui.item.click", player.getName()));
             }
-            lore.add(I18n.format("user.select.gui.item.click", player.getName()));
         } else {
             lore.add(I18n.format("user.select.gui.item.selected"));
         }

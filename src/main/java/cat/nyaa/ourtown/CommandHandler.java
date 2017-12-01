@@ -30,14 +30,14 @@ public class CommandHandler extends CommandReceiver {
         Player player = null;
         SpawnLocation spawnLocation = null;
         if (sender.hasPermission("town.admin") && args.length() >= 2) {
-            String name = args.next();
+            String name = args.nextString();
             spawnLocation = plugin.config.spawnConfig.spawns.get(name);
             if (spawnLocation == null) {
                 msg(sender, "user.spawn.not_found", name);
                 return;
             }
             if (args.length() == 3) {
-                String playerName = args.next();
+                String playerName = args.nextString();
                 player = Bukkit.getPlayer(playerName);
                 if (player == null) {
                     msg(sender, "user.info.player_not_found", playerName);
@@ -61,13 +61,13 @@ public class CommandHandler extends CommandReceiver {
     @SubCommand(value = "select", permission = "town.player.select")
     public void commandSelect(CommandSender sender, Arguments args) {
         if (args.length() == 3 && sender.hasPermission("town.admin")) {
-            String name = args.next();
+            String name = args.nextString();
             SpawnLocation spawnLocation = plugin.config.spawnConfig.spawns.get(name);
             if (spawnLocation == null || (SpawnConfig.DEFAULT.equals(name) && !sender.hasPermission("town.admin"))) {
                 msg(sender, "user.spawn.not_found", name);
                 return;
             }
-            String playerName = args.next();
+            String playerName = args.nextString();
             OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(playerName);
             if (offlinePlayer != null) {
                 plugin.setPlayerSpawn(offlinePlayer, spawnLocation);
@@ -94,5 +94,33 @@ public class CommandHandler extends CommandReceiver {
     @SubCommand(value = "save", permission = "town.admin")
     public void commandSave(CommandSender sender, Arguments args) {
         plugin.config.save();
+    }
+
+    @SubCommand(value = "status", permission = "town.admin")
+    public void commandStatus(CommandSender sender, Arguments args) {
+        if (args.length() == 3) {
+            String name = args.nextString();
+            SpawnLocation spawnLocation = plugin.config.spawnConfig.spawns.get(name);
+            if (spawnLocation == null || (SpawnConfig.DEFAULT.equals(name))) {
+                msg(sender, "user.spawn.not_found", name);
+                return;
+            }
+            String status = args.nextString().toUpperCase();
+            if ("ENABLE".equals(status)) {
+                spawnLocation.setAvailable(true);
+            } else if ("DISABLE".equals(status)) {
+                spawnLocation.setAvailable(false);
+            }
+            if (spawnLocation.isAvailable()) {
+                status = I18n.format("user.status.available");
+            } else {
+                status = I18n.format("user.status.unavailable");
+            }
+            msg(sender, "user.status.set", status);
+            plugin.config.save();
+        } else {
+            msg(sender, "manual.status.usage");
+            return;
+        }
     }
 }

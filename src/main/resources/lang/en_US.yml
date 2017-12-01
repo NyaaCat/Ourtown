@@ -16,6 +16,7 @@ user:
     set_with_fee: "you spend %d to set your spawn point to %s"
     select: "please use &b/town select&r to select your spawn point"
     lock: "you can not reselect spawn point"
+    unavailable: "This spawn point is unavailable"
     gui:
       title: "Select your spawn point"
       item:
@@ -24,6 +25,7 @@ user:
         fee: "&bFee: %d"
         click: "&aClick to select"
         selected: "&9Selected"
+        unavailable: "&cUnavailable"
   info:
     player_not_found: "player %s not found"
     back: "&fBack"
@@ -34,9 +36,14 @@ user:
     not_found: "spawn point %s not found"
     list:
       info: "%s: %s (%s %d, %d, %d)"
+      status: " Status: %s"
     set: "set %s to %s (%d, %d, %d)"
     add: "added %s (%s %d, %d, %d)"
     del: "removed %s"
+  status:
+    unavailable: "unavailable"
+    available: "available"
+    set: "set status to %s"
 manual:
   no_description: "No description"
   no_usage: "No usage"
@@ -71,3 +78,6 @@ manual:
   reload:
     description: "Reload config from config file. Unsaved changes will lost"
     usage: "/town reload"
+  status:
+    description: "Set spawn status"
+    usage: "/town status [name] [enable|disable]"
