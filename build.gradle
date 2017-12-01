@@ -49,7 +49,7 @@ dependencies {
     compile('net.ess3:Essentials:2.13-SNAPSHOT') {
         transitive = false
     }
-    compile('cat.nyaa:nyaacore:4.0-SNAPSHOT') {
+    compile('cat.nyaa:nyaacore:4.1-SNAPSHOT') {
         transitive = false
     }
     compile 'org.librazy:NyaaUtilsLangChecker:1.0-SNAPSHOT'
