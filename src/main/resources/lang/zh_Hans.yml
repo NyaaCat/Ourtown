@@ -1,0 +1,83 @@
+internal:
+  info:
+    using_language: ''
+    command_complete: ''
+    usage_prompt: ''
+log:
+  add: ''
+  set: ''
+  del: ''
+  select: ''
+  respawn: ''
+user:
+  teleport: ''
+  select:
+    set: ''
+    set_with_fee: ''
+    select: ''
+    lock: ''
+    unavailable: ''
+    gui:
+      title: ''
+      item:
+        name: ''
+        description: ''
+        fee: ''
+        click: ''
+        selected: ''
+        unavailable: ''
+  info:
+    player_not_found: ''
+    back: ''
+    next_page: ''
+    no_enough_money: ''
+  spawn:
+    exist: ''
+    not_found: ''
+    list:
+      info: ''
+      status: ''
+    set: ''
+    add: ''
+    del: ''
+  status:
+    unavailable: ''
+    available: ''
+    set: ''
+manual:
+  no_description: ''
+  no_usage: ''
+  spawn:
+    add:
+      description: ''
+      usage: ''
+    set:
+      description: ''
+      usage: ''
+    list:
+      description: ''
+      usage: ''
+    del:
+      description: ''
+      usage: ''
+    setdescription:
+      description: ''
+      usage: ''
+  tp:
+    description: ''
+    usage: ''
+  select:
+    description: ''
+    usage: ''
+  help:
+    description: ''
+    usage: ''
+  save:
+    description: ''
+    usage: ''
+  reload:
+    description: ''
+    usage: ''
+  status:
+    description: ''
+    usage: ''
