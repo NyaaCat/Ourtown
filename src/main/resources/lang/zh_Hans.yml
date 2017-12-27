@@ -1,83 +1,86 @@
 internal:
   info:
-    using_language: ''
-    command_complete: ''
-    usage_prompt: ''
+    using_language: '当前使用语言: %s'
+    command_complete: 命令已执行
+    usage_prompt: '用法: %s'
 log:
-  add: ''
-  set: ''
-  del: ''
-  select: ''
-  respawn: ''
+  add: '建立重生点: {spawn: "%s", description: "%s" world: "%s", x: %s, y: %s, z: %s, yaw:
+    %s, pitch: %s}'
+  set: '设置重生点 {spawn: "%s", description: "%s" world: "%s", x: %s, y: %s, z: %s, yaw:
+    %s, pitch: %s}'
+  del: '移除重生点 {spawn: "%s", description: "%s" world: "%s", x: %s, y: %s, z: %s, yaw:
+    %s, pitch: %s}'
+  select: '设置玩家重生点 {player: "%s", spawn: "%s"}'
+  respawn: '玩家重生 {player: "%s", spawn: "%s"}'
 user:
-  teleport: ''
+  teleport: 传送至 %s
   select:
-    set: ''
-    set_with_fee: ''
-    select: ''
-    lock: ''
-    unavailable: ''
+    set: 已设置你的重生点为 %s
+    set_with_fee: 你消费 %d 设置重生点到 %s
+    select: 请使用 &b/town select&r 以选择重生点
+    lock: 你不能重新选择重生点
+    unavailable: 该重生点不可用
     gui:
-      title: ''
+      title: 选择重生点
       item:
-        name: ''
-        description: ''
-        fee: ''
-        click: ''
-        selected: ''
-        unavailable: ''
+        name: '&b%s'
+        description: '&a%s'
+        fee: '&b费用: %d'
+        click: '&a点击以选择'
+        selected: '&9已选择'
+        unavailable: '&c不可用'
   info:
-    player_not_found: ''
-    back: ''
-    next_page: ''
-    no_enough_money: ''
+    player_not_found: 玩家 %s 未找到
+    back: '&f返回'
+    next_page: '&f下一页'
+    no_enough_money: 你没有足够的金钱
   spawn:
-    exist: ''
-    not_found: ''
+    exist: 重生点 %s 已存在
+    not_found: 重生点 %s 未找到
     list:
-      info: ''
-      status: ''
-    set: ''
-    add: ''
-    del: ''
+      info: '%s: %s (%s %d, %d, %d)'
+      status: '状态: %s'
+    set: 设置 %s 到 %s (%d, %d, %d)
+    add: 已添加 %s (%s %d, %d, %d)
+    del: 已移除 %s
   status:
-    unavailable: ''
-    available: ''
-    set: ''
+    unavailable: 不可用
+    available: 可用
+    set: 设置状态为 %s
 manual:
-  no_description: ''
-  no_usage: ''
+  no_description: 无描述
+  no_usage: 无用法说明
   spawn:
     add:
-      description: ''
-      usage: ''
+      description: 添加一个重生点
+      usage: /town add [name] [description]
     set:
-      description: ''
-      usage: ''
+      description: 设置重生点
+      usage: /town set [name] [description]
     list:
-      description: ''
-      usage: ''
+      description: 列出全部重生点
+      usage: /town list
     del:
-      description: ''
-      usage: ''
+      description: 删除重生点
+      usage: /town del [name]
     setdescription:
-      description: ''
-      usage: ''
+      description: 设置重生点描述
+      usage: /town del [name] [description]
   tp:
-    description: ''
-    usage: ''
+    description: 传送到重生点
+    usage: /town tp
   select:
-    description: ''
-    usage: ''
+    description: 选择重生点
+    usage: /town select [name]
   help:
-    description: ''
-    usage: ''
+    description: 展示帮助文本
+    usage: /town [subCommands...] help
   save:
-    description: ''
-    usage: ''
+    description: 保存数据到配置文件
+    usage: /town save
   reload:
-    description: ''
-    usage: ''
+    description: 重新读取配置文件。未保存的变更将丢失
+    usage: /town reload
   status:
-    description: ''
-    usage: ''
+    description: 设置重生点状态
+    usage: /town status [name] [enable|disable]
