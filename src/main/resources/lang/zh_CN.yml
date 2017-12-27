@@ -1,7 +1,7 @@
 internal:
   info:
     using_language: '当前使用语言: %s'
-    command_complete: 命令已执行
+    command_complete: 命令已执行!
     usage_prompt: '用法: %s'
 log:
   add: '建立重生点: {spawn: "%s", description: "%s" world: "%s", x: %s, y: %s, z: %s, yaw:
@@ -53,7 +53,7 @@ manual:
   spawn:
     add:
       description: 添加一个重生点
-      usage: /town add [name] [description]
+      usage: /town add [名称] [描述]
     set:
       description: 设置重生点
       usage: /town set [name] [description]
@@ -71,16 +71,16 @@ manual:
     usage: /town tp
   select:
     description: 选择重生点
-    usage: /town select [name]
+    usage: /town select [名称]
   help:
     description: 展示帮助文本
-    usage: /town [subCommands...] help
+    usage: /town [子命令...] help
   save:
     description: 保存数据到配置文件
     usage: /town save
   reload:
-    description: 重新读取配置文件。未保存的变更将丢失
+    description: 从文件重新加载配置信息，未保存的修改将丢失
     usage: /town reload
   status:
     description: 设置重生点状态
-    usage: /town status [name] [enable|disable]
+    usage: /town status [名称] [enable|disable]
