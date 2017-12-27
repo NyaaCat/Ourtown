@@ -1,83 +1,86 @@
 internal:
   info:
-    using_language: "Now using language: %s"
-    command_complete: "Command Executed!"
-    usage_prompt: "Usage: %s"
+    using_language: 'Now using language: %s'
+    command_complete: Command Executed!
+    usage_prompt: 'Usage: %s'
 log:
-  add: "create spawn {spawn: \"%s\", description: \"%s\" world: \"%s\", x: %s, y: %s, z: %s, yaw: %s, pitch: %s}"
-  set: "set spawn {spawn: \"%s\", description: \"%s\" world: \"%s\", x: %s, y: %s, z: %s, yaw: %s, pitch: %s}"
-  del: "remove spawn {spawn: \"%s\", description: \"%s\" world: \"%s\", x: %s, y: %s, z: %s, yaw: %s, pitch: %s}"
-  select: "set player spawn {player: \"%s\", spawn: \"%s\"}"
-  respawn: "player respawn {player: \"%s\", spawn: \"%s\"}"
+  add: 'create spawn {spawn: "%s", description: "%s" world: "%s", x: %s, y: %s, z:
+    %s, yaw: %s, pitch: %s}'
+  set: 'set spawn {spawn: "%s", description: "%s" world: "%s", x: %s, y: %s, z: %s,
+    yaw: %s, pitch: %s}'
+  del: 'remove spawn {spawn: "%s", description: "%s" world: "%s", x: %s, y: %s, z:
+    %s, yaw: %s, pitch: %s}'
+  select: 'set player spawn {player: "%s", spawn: "%s"}'
+  respawn: 'player respawn {player: "%s", spawn: "%s"}'
 user:
-  teleport: "teleported to %s"
+  teleport: teleported to %s
   select:
-    set: "set your spawn point to %s"
-    set_with_fee: "you spend %d to set your spawn point to %s"
-    select: "please use &b/town select&r to select your spawn point"
-    lock: "you can not reselect spawn point"
-    unavailable: "This spawn point is unavailable"
+    set: set your spawn point to %s
+    set_with_fee: you spend %d to set your spawn point to %s
+    select: please use &b/town select&r to select your spawn point
+    lock: you can not reselect spawn point
+    unavailable: This spawn point is unavailable
     gui:
-      title: "Select your spawn point"
+      title: Select your spawn point
       item:
-        name: "&b%s"
-        description: "&a%s"
-        fee: "&bFee: %d"
-        click: "&aClick to select"
-        selected: "&9Selected"
-        unavailable: "&cUnavailable"
+        name: '&b%s'
+        description: '&a%s'
+        fee: '&bFee: %d'
+        click: '&aClick to select'
+        selected: '&9Selected'
+        unavailable: '&cUnavailable'
   info:
-    player_not_found: "player %s not found"
-    back: "&fBack"
-    next_page: "&fNext Page"
-    no_enough_money: "You do not have that much money"
+    player_not_found: player %s not found
+    back: '&fBack'
+    next_page: '&fNext Page'
+    no_enough_money: You do not have that much money
   spawn:
-    exist: "spawn point %s already exist"
-    not_found: "spawn point %s not found"
+    exist: spawn point %s already exist
+    not_found: spawn point %s not found
     list:
-      info: "%s: %s (%s %d, %d, %d)"
-      status: " Status: %s"
-    set: "set %s to %s (%d, %d, %d)"
-    add: "added %s (%s %d, %d, %d)"
-    del: "removed %s"
+      info: '%s: %s (%s %d, %d, %d)'
+      status: 'Status: %s'
+    set: set %s to %s (%d, %d, %d)
+    add: added %s (%s %d, %d, %d)
+    del: removed %s
   status:
-    unavailable: "unavailable"
-    available: "available"
-    set: "set status to %s"
+    unavailable: unavailable
+    available: available
+    set: set status to %s
 manual:
-  no_description: "No description"
-  no_usage: "No usage"
+  no_description: No description
+  no_usage: No usage
   spawn:
     add:
-      description: "add a spawn point"
-      usage: "/town add [name] [description]"
+      description: add a spawn point
+      usage: /town add [name] [description]
     set:
-      description: "set a spawn point"
-      usage: "/town set [name] [description]"
+      description: set a spawn point
+      usage: /town set [name] [description]
     list:
-      description: "List all spawn points"
-      usage: "/town list"
+      description: List all spawn points
+      usage: /town list
     del:
-      description: "Delete a spawn point"
-      usage: "/town del [name]"
+      description: Delete a spawn point
+      usage: /town del [name]
     setdescription:
-      description: "set spawn point description "
-      usage: "/town del [name] [description]"
+      description: set spawn point description
+      usage: /town del [name] [description]
   tp:
-    description: "Teleport to your spawn"
-    usage: "/town tp"
+    description: Teleport to your spawn
+    usage: /town tp
   select:
-    description: "Select your spawn point"
-    usage: "/town select [name]"
+    description: Select your spawn point
+    usage: /town select [name]
   help:
-    description: "Show help message"
-    usage: "/town [subCommands...] help"
+    description: Show help message
+    usage: /town [subCommands...] help
   save:
-    description: "Save all data to config file"
-    usage: "/town save"
+    description: Save all data to config file
+    usage: /town save
   reload:
-    description: "Reload config from config file. Unsaved changes will lost"
-    usage: "/town reload"
+    description: Reload config from config file. Unsaved changes will lost
+    usage: /town reload
   status:
-    description: "Set spawn status"
-    usage: "/town status [name] [enable|disable]"
+    description: Set spawn status
+    usage: /town status [name] [enable|disable]
