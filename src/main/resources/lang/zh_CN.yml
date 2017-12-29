@@ -4,7 +4,7 @@ internal:
     command_complete: 命令已执行!
     usage_prompt: '用法: %s'
 log:
-  add: '建立重生点: {spawn: "%s", description: "%s" world: "%s", x: %s, y: %s, z: %s, yaw:
+  add: '建立重生点 {spawn: "%s", description: "%s" world: "%s", x: %s, y: %s, z: %s, yaw:
     %s, pitch: %s}'
   set: '设置重生点 {spawn: "%s", description: "%s" world: "%s", x: %s, y: %s, z: %s, yaw:
     %s, pitch: %s}'
@@ -17,7 +17,7 @@ user:
   select:
     set: 已设置你的重生点为 %s
     set_with_fee: 你消费 %d 设置重生点到 %s
-    select: 请使用 &b/town select&r 以选择重生点
+    select: 请使用 &b/town select &r以选择重生点
     lock: 你不能重新选择重生点
     unavailable: 该重生点不可用
     gui:
@@ -33,7 +33,7 @@ user:
     player_not_found: 玩家 %s 未找到
     back: '&f返回'
     next_page: '&f下一页'
-    no_enough_money: 你没有足够的金钱
+    no_enough_money: 你没有足够的现金
   spawn:
     exist: 重生点 %s 已存在
     not_found: 重生点 %s 未找到
@@ -56,7 +56,7 @@ manual:
       usage: /town add [名称] [描述]
     set:
       description: 设置重生点
-      usage: /town set [name] [description]
+      usage: /town set [名称] [描述]
     list:
       description: 列出全部重生点
       usage: /town list
@@ -65,7 +65,7 @@ manual:
       usage: /town del [name]
     setdescription:
       description: 设置重生点描述
-      usage: /town del [name] [description]
+      usage: /town del [名称] [描述]
   tp:
     description: 传送到重生点
     usage: /town tp
@@ -73,7 +73,7 @@ manual:
     description: 选择重生点
     usage: /town select [名称]
   help:
-    description: 展示帮助文本
+    description: 显示帮助信息
     usage: /town [子命令...] help
   save:
     description: 保存数据到配置文件
