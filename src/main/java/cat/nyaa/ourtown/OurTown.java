@@ -24,6 +24,7 @@ public final class OurTown extends JavaPlugin {
     private EventListener eventListener;
     private AutoSave autoSave;
     public ISystemBalance systemBalance;
+    public boolean reload = false;
 
     @Override
     public void onEnable() {
@@ -42,10 +43,12 @@ public final class OurTown extends JavaPlugin {
         } catch (ComponentNotAvailableException e) {
             systemBalance = null;
         }
-        try {
-            IPCUtils.registerMethod("ourtown_get_player_spawn", OurTown.class.getMethod("getPlayerSpawnLocation", OfflinePlayer.class));
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
+        if (!reload) {
+            try {
+                IPCUtils.registerMethod("ourtown_get_player_spawn", OurTown.class.getMethod("getPlayerSpawnLocation", OfflinePlayer.class));
+            } catch (NoSuchMethodException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -59,6 +62,7 @@ public final class OurTown extends JavaPlugin {
     }
 
     public void reload() {
+        reload = true;
         getServer().getScheduler().cancelTasks(this);
         getCommand("town").setExecutor(null);
         getCommand("town").setTabCompleter(null);
