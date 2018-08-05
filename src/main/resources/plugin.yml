@@ -4,6 +4,7 @@ main: cat.nyaa.ourtown.OurTown
 depend: [NyaaCore,Essentials]
 softdepend: [HamsterEcoHelper]
 authors: [cylin]
+api-version: 1.13
 commands:
   town:
 permissions:

@@ -44,21 +44,25 @@ repositories {
     }
 }
 
+configurations.all {
+    resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+}
+
 dependencies {
-    compile 'org.spigotmc:spigot-api:1.12-R0.1-SNAPSHOT'
+    compile 'org.spigotmc:spigot-api:1.13-R0.1-SNAPSHOT'
     compile('net.ess3:Essentials:2.13-SNAPSHOT') {
         transitive = false
     }
-    compile('cat.nyaa:nyaacore:4.1-SNAPSHOT') {
+    compile('cat.nyaa:nyaacore:6.1-SNAPSHOT') {
         transitive = false
     }
-    compile 'org.librazy:NyaaUtilsLangChecker:1.0-SNAPSHOT'
+    compile 'org.librazy:NyaaUtilsLangChecker:2.0-SNAPSHOT'
 }
 
 String nyaaCoreLangDir = System.getenv("NYAACORE_LANG_DIR")
 
 compileJava {
-    options.compilerArgs += ["-Xlint:deprecation", "-Xlint:unchecked"]
+    options.compilerArgs += ["-Xplugin:NyaaUtilsLangAnnotationProcessor", "-Xlint:deprecation,unchecked,rawtypes"]
     if (nyaaCoreLangDir != null) {
         options.compilerArgs += ["-ALANG_DIR_ADDITIONAL_PATH=" + nyaaCoreLangDir]
     }
