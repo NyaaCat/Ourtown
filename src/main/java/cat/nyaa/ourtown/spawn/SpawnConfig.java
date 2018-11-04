@@ -64,7 +64,7 @@ public class SpawnConfig extends FileConfigure {
         }
         if (!spawns.containsKey(DEFAULT) || !spawns.get(DEFAULT).isValid()) {
             plugin.getLogger().warning("default spawn point not exist");
-            spawns.put(DEFAULT, new SpawnLocation(DEFAULT, "", Bukkit.getWorld("world").getSpawnLocation()));
+            spawns.put(DEFAULT, new SpawnLocation(DEFAULT, "", Bukkit.getWorlds().stream().findFirst().orElseThrow(IllegalStateException::new).getSpawnLocation()));
         }
     }
 
