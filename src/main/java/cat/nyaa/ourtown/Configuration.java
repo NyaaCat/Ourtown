@@ -29,7 +29,7 @@ public class Configuration extends PluginConfigure {
     @Serializable
     public boolean gui_random = true;
     @Serializable
-    public Material gui_item = Material.SIGN;
+    public Material gui_item = Material.OAK_SIGN;
     @Serializable
     public boolean auto_open_gui = true;
     @Serializable

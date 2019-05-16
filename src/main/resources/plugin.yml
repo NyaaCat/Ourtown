@@ -1,5 +1,5 @@
 name: ourtown
-version: 2.0
+version: ${version}
 main: cat.nyaa.ourtown.OurTown
 depend: [NyaaCore,Essentials]
 softdepend: [HamsterEcoHelper]
