@@ -1,8 +1,8 @@
 apply plugin: "java-library"
 apply plugin: "maven-publish"
 
-ext.majorVersion = 6
-ext.minorVersion = 4
+ext.majorVersion = 7
+ext.minorVersion = 0
 ext.minecraftVersion = "1.14.4"
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -34,7 +34,7 @@ dependencies {
     if (gradle.hasProperty("useLocalDependencies") && gradle.useLocalDependencies) {
         compileOnly project(":NyaaCore")
     } else {
-        compileOnly('cat.nyaa:nyaacore:6.4-SNAPSHOT') { transitive = false }
+        compileOnly('cat.nyaa:nyaacore:7.0-SNAPSHOT') { transitive = false }
     }
 
     // 3rd party plugins
@@ -42,19 +42,8 @@ dependencies {
     compileOnly 'javax.persistence:javax.persistence-api:2.2' // NyaaCore shadows this
 
     // annotation processor
-    compileOnly 'org.librazy:NyaaUtilsLangChecker:2.0-SNAPSHOT'
-    annotationProcessor 'org.librazy:NyaaUtilsLangChecker:2.0-SNAPSHOT'
     annotationProcessor "org.spigotmc:spigot-api:$minecraftVersion-R0.1-SNAPSHOT"
 }
-
-// TODO: langcheck temporarily disabled
-// String nyaaCoreLangDir = System.getenv("NYAACORE_LANG_DIR")
-// compileJava {
-//     options.compilerArgs += ["-Xplugin:NyaaUtilsLangAnnotationProcessor", "-Xlint:deprecation,unchecked,rawtypes"]
-//     if (nyaaCoreLangDir != null) {
-//         options.compilerArgs += ["-ALANG_DIR_ADDITIONAL_PATH=" + nyaaCoreLangDir]
-//     }
-// }
 
 // publications
 task sourcesJar(type: Jar) {

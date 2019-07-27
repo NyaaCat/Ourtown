@@ -1,7 +1,9 @@
 package cat.nyaa.ourtown;
 
-import cat.nyaa.nyaacore.CommandReceiver;
 import cat.nyaa.nyaacore.LanguageRepository;
+import cat.nyaa.nyaacore.cmdreceiver.Arguments;
+import cat.nyaa.nyaacore.cmdreceiver.CommandReceiver;
+import cat.nyaa.nyaacore.cmdreceiver.SubCommand;
 import cat.nyaa.ourtown.spawn.SpawnCommands;
 import cat.nyaa.ourtown.spawn.SpawnConfig;
 import cat.nyaa.ourtown.spawn.SpawnGUI;
@@ -57,7 +59,6 @@ public class CommandHandler extends CommandReceiver {
         plugin.teleport(player, spawnLocation);
     }
 
-    @SuppressWarnings("deprecation")
     @SubCommand(value = "select", permission = "town.player.select")
     public void commandSelect(CommandSender sender, Arguments args) {
         if (args.length() == 3 && sender.hasPermission("town.admin")) {
@@ -67,8 +68,7 @@ public class CommandHandler extends CommandReceiver {
                 msg(sender, "user.spawn.not_found", name);
                 return;
             }
-            String playerName = args.nextString();
-            OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(playerName);
+            OfflinePlayer offlinePlayer = args.nextOfflinePlayer();
             if (offlinePlayer != null) {
                 plugin.setPlayerSpawn(offlinePlayer, spawnLocation);
                 if (offlinePlayer.isOnline() && plugin.hasSpawn(offlinePlayer)) {
