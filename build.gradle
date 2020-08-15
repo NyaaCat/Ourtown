@@ -1,9 +1,9 @@
 apply plugin: "java-library"
 apply plugin: "maven-publish"
 
-ext.majorVersion = 7
-ext.minorVersion = 2
-ext.minecraftVersion = "1.15.1"
+ext.majorVersion = 8
+ext.minorVersion = 0
+ext.minecraftVersion = "1.16.1"
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
@@ -34,11 +34,11 @@ dependencies {
     if (gradle.hasProperty("useLocalDependencies") && gradle.useLocalDependencies) {
         compileOnly project(":NyaaCore")
     } else {
-        compileOnly('cat.nyaa:nyaacore:7.2-SNAPSHOT') { transitive = false }
+        compileOnly('cat.nyaa:nyaacore:8.0-SNAPSHOT') { transitive = false }
     }
 
     // 3rd party plugins
-    compileOnly('net.ess3:EssentialsX:2.17.0') { transitive = false }
+    compileOnly('net.ess3:EssentialsX:2.18.0') { transitive = false }
     compileOnly 'javax.persistence:javax.persistence-api:2.2' // NyaaCore shadows this
 
     // annotation processor
