@@ -3,7 +3,6 @@ package cat.nyaa.ourtown;
 import cat.nyaa.nyaacore.component.ComponentNotAvailableException;
 import cat.nyaa.nyaacore.component.ISystemBalance;
 import cat.nyaa.nyaacore.component.NyaaComponent;
-import cat.nyaa.nyaacore.utils.IPCUtils;
 import cat.nyaa.ourtown.spawn.SpawnConfig;
 import cat.nyaa.ourtown.spawn.SpawnLocation;
 import com.earth2me.essentials.Essentials;
@@ -42,13 +41,6 @@ public final class OurTown extends JavaPlugin {
             systemBalance = NyaaComponent.get(ISystemBalance.class);
         } catch (ComponentNotAvailableException e) {
             systemBalance = null;
-        }
-        if (!reload) {
-            try {
-                IPCUtils.registerMethod("ourtown_get_player_spawn", OurTown.class.getMethod("getPlayerSpawnLocation", OfflinePlayer.class));
-            } catch (NoSuchMethodException e) {
-                e.printStackTrace();
-            }
         }
     }
 
