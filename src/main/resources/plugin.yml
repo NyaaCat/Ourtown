@@ -7,6 +7,12 @@ api-version: 1.13
 commands:
   town:
     description: "our town"
+  home:
+    description: "your home"
+  sethome:
+    description: "set your home"
+  back:
+    description: "go back"
 permissions:
   town.player.select:
     description: Select a spawn point
