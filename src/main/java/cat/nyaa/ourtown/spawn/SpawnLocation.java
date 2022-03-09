@@ -4,6 +4,7 @@ package cat.nyaa.ourtown.spawn;
 import cat.nyaa.nyaacore.configuration.ISerializable;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.jetbrains.annotations.NotNull;
 
 public class SpawnLocation implements ISerializable {
     @Serializable
@@ -102,6 +103,7 @@ public class SpawnLocation implements ISerializable {
         return world != null && Bukkit.getWorld(world) != null;
     }
 
+    @NotNull
     public Location getLocation() {
         return new Location(Bukkit.getWorld(getWorld()), getX(), getY(), getZ(), (float) getYaw(), (float) getPitch());
     }

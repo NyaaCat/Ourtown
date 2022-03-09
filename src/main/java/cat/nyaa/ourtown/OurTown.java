@@ -1,6 +1,7 @@
 package cat.nyaa.ourtown;
 
 import cat.nyaa.ecore.EconomyCore;
+import cat.nyaa.ourtown.command.CommandHandler;
 import cat.nyaa.ourtown.spawn.SpawnConfig;
 import cat.nyaa.ourtown.spawn.SpawnLocation;
 import com.earth2me.essentials.Essentials;
@@ -26,6 +27,7 @@ public final class OurTown extends JavaPlugin {
     public boolean reload = false;
     @Nullable
     public static EconomyCore economyProvider;
+    private TeleportCmdListener teleportCmdListener;
 
     @Override
     public void onEnable() {
@@ -37,12 +39,19 @@ public final class OurTown extends JavaPlugin {
         getCommand("town").setExecutor(commandHandler);
         getCommand("town").setTabCompleter(commandHandler);
         eventListener = new EventListener(this);
+
         ess = (Essentials) getServer().getPluginManager().getPlugin("Essentials");
+        if (ess == null) {
+            getLogger().warning("Essentials not found!");
+            this.getServer().getPluginManager().disablePlugin(this);
+            return;
+        }
         if (!setupEconomy()) {
             this.getLogger().severe("ECore is not installed!");
             this.getServer().getPluginManager().disablePlugin(this);
             return;
         }
+        teleportCmdListener = new TeleportCmdListener(this, ess, economyProvider);
         autoSave = new AutoSave(this);
     }
 
@@ -73,9 +82,13 @@ public final class OurTown extends JavaPlugin {
     }
 
     public void teleport(Player player, SpawnLocation loc) {
+        this.teleport(player, loc.getLocation(), loc.getName());
+    }
+
+    public void teleport(Player player, Location location, String locationName) {
         try {
-            ess.getUser(player).getAsyncTeleport().now(loc.getLocation(), false, PlayerTeleportEvent.TeleportCause.PLUGIN,new CompletableFuture<>());
-            player.sendMessage(I18n.format("user.teleport", loc.getName()));
+            ess.getUser(player).getAsyncTeleport().now(location, false, PlayerTeleportEvent.TeleportCause.PLUGIN, new CompletableFuture<>());
+            player.sendMessage(I18n.format("user.teleport.info", locationName));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -103,9 +116,10 @@ public final class OurTown extends JavaPlugin {
         }
         return s;
     }
-
-    public static Location getPlayerSpawnLocation(OfflinePlayer player) {
+    public static @Nullable Location getPlayerSpawnLocation(OfflinePlayer player) {
         if (OurTown.instance == null) return null;
         return OurTown.instance.getPlayerSpawn(player).getLocation();
     }
+
+
 }

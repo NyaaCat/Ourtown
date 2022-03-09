@@ -13,7 +13,24 @@ log:
   select: 'set player spawn {player: "%s", spawn: "%s"}'
   respawn: 'player respawn {player: "%s", spawn: "%s"}'
 user:
-  teleport: teleported to %s
+  teleport:
+    info: teleported to %s
+    home: home
+    sethome: set home
+    back: back
+    ok: You spend %.2f to %s
+    not_set_yet: You has not set a home
+    no_loc: No valid location found
+    money_insufficient: You don't have enough money(%.2f) to use this command
+    error: That home seems to be broken, seek pm for help
+    invalid_home: That home is in a removed world
+    bed_not_set_yet: You has not set a bed or home
+    unsafe: The teleport destination is unsafe
+    invalid_name: Invalid home name
+    home_limit: You cannot set more than %d homes
+    home_limit_one: You can set only one home. Renaming to home
+    homes: 'Homes: %s'
+
   select:
     set: set your spawn point to %s
     set_with_fee: you spend %d to set your spawn point to %s

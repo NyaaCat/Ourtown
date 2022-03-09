@@ -13,7 +13,23 @@ log:
   select: '设置玩家重生点 {player: "%s", spawn: "%s"}'
   respawn: '玩家重生 {player: "%s", spawn: "%s"}'
 user:
-  teleport: 传送至 %s
+  teleport:
+    info: 传送至 %s
+    home: home
+    sethome: set home
+    back: 返回
+    ok: 已支付 %.2f 用于传送至 %s
+    not_set_yet: 你还没有设置家
+    no_loc: 没有有效的返回地点
+    money_insufficient: 你没有足够的现金（%.2f）来执行此操作
+    error: 指定的家位置无效，请联系管理员
+    invalid_home: 指定的家在已移除的世界中
+    bed_not_set_yet: 你尚未设置床或家
+    unsafe: 传送的目标地点不安全
+    invalid_name: 无效的家名称
+    home_limit: 你最多只能设置 %d 个家
+    home_limit_one: 你只能设置 1 个家，该家位置将被重命名为 home
+    homes: 已设置的家：%s
   select:
     set: 已设置你的重生点为 %s
     set_with_fee: 你消费 %d 设置重生点到 %s

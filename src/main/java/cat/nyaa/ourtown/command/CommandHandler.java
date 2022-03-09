@@ -1,9 +1,11 @@
-package cat.nyaa.ourtown;
+package cat.nyaa.ourtown.command;
 
 import cat.nyaa.nyaacore.LanguageRepository;
 import cat.nyaa.nyaacore.cmdreceiver.Arguments;
 import cat.nyaa.nyaacore.cmdreceiver.CommandReceiver;
 import cat.nyaa.nyaacore.cmdreceiver.SubCommand;
+import cat.nyaa.ourtown.I18n;
+import cat.nyaa.ourtown.OurTown;
 import cat.nyaa.ourtown.spawn.SpawnCommands;
 import cat.nyaa.ourtown.spawn.SpawnConfig;
 import cat.nyaa.ourtown.spawn.SpawnGUI;
