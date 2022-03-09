@@ -1,7 +1,6 @@
 package cat.nyaa.ourtown.spawn;
 
 
-import cat.nyaa.nyaacore.utils.VaultUtils;
 import cat.nyaa.ourtown.I18n;
 import cat.nyaa.ourtown.OurTown;
 import org.bukkit.Bukkit;
@@ -124,10 +123,16 @@ public class SpawnGUI extends SpawnInventoryHolder {
                 return;
             } else {
                 if (plugin.hasSpawn(player) && plugin.config.select_fee > 0) {
-                    if (VaultUtils.withdraw(player, plugin.config.select_fee)) {
-                        if (plugin.systemBalance != null) {
-                            plugin.systemBalance.deposit(plugin.config.select_fee, plugin);
+                    var success = false;
+                    if (OurTown.economyProvider == null) {
+                        success = false;
+                    } else {
+                        if (OurTown.economyProvider.withdrawPlayer(player.getUniqueId(), plugin.config.select_fee)) {
+                            OurTown.economyProvider.depositSystemVault(plugin.config.select_fee);
+                            success = true;
                         }
+                    }
+                    if (success) {
                         player.sendMessage(I18n.format("user.select.set_with_fee", plugin.config.select_fee, spawnLocation.getName()));
                     } else {
                         player.sendMessage(I18n.format("user.info.no_enough_money"));

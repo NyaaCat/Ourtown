@@ -1,12 +1,12 @@
 name: ourtown
 version: ${version}
 main: cat.nyaa.ourtown.OurTown
-depend: [NyaaCore,Essentials]
-softdepend: [HamsterEcoHelper]
-authors: [cylin]
+depend: [ NyaaCore,Essentials,ECore ]
+authors: [ cylin ]
 api-version: 1.13
 commands:
   town:
+    description: "our town"
 permissions:
   town.player.select:
     description: Select a spawn point

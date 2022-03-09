@@ -1,8 +1,6 @@
 package cat.nyaa.ourtown;
 
-import cat.nyaa.nyaacore.component.ComponentNotAvailableException;
-import cat.nyaa.nyaacore.component.ISystemBalance;
-import cat.nyaa.nyaacore.component.NyaaComponent;
+import cat.nyaa.ecore.EconomyCore;
 import cat.nyaa.ourtown.spawn.SpawnConfig;
 import cat.nyaa.ourtown.spawn.SpawnLocation;
 import com.earth2me.essentials.Essentials;
@@ -13,6 +11,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.concurrent.CompletableFuture;
 
 public final class OurTown extends JavaPlugin {
     public static OurTown instance;
@@ -22,8 +23,9 @@ public final class OurTown extends JavaPlugin {
     private CommandHandler commandHandler;
     private EventListener eventListener;
     private AutoSave autoSave;
-    public ISystemBalance systemBalance;
     public boolean reload = false;
+    @Nullable
+    public static EconomyCore economyProvider;
 
     @Override
     public void onEnable() {
@@ -36,12 +38,20 @@ public final class OurTown extends JavaPlugin {
         getCommand("town").setTabCompleter(commandHandler);
         eventListener = new EventListener(this);
         ess = (Essentials) getServer().getPluginManager().getPlugin("Essentials");
-        autoSave = new AutoSave(this);
-        try {
-            systemBalance = NyaaComponent.get(ISystemBalance.class);
-        } catch (ComponentNotAvailableException e) {
-            systemBalance = null;
+        if (!setupEconomy()) {
+            this.getLogger().severe("ECore is not installed!");
+            this.getServer().getPluginManager().disablePlugin(this);
+            return;
         }
+        autoSave = new AutoSave(this);
+    }
+
+    private boolean setupEconomy() {
+        var rsp = Bukkit.getServicesManager().getRegistration(EconomyCore.class);
+        if (rsp != null) {
+            economyProvider = rsp.getProvider();
+        }
+        return economyProvider != null;
     }
 
     @Override
@@ -64,7 +74,7 @@ public final class OurTown extends JavaPlugin {
 
     public void teleport(Player player, SpawnLocation loc) {
         try {
-            ess.getUser(player).getTeleport().now(loc.getLocation(), false, PlayerTeleportEvent.TeleportCause.PLUGIN);
+            ess.getUser(player).getAsyncTeleport().now(loc.getLocation(), false, PlayerTeleportEvent.TeleportCause.PLUGIN,new CompletableFuture<>());
             player.sendMessage(I18n.format("user.teleport", loc.getName()));
         } catch (Exception e) {
             e.printStackTrace();
@@ -94,8 +104,8 @@ public final class OurTown extends JavaPlugin {
         return s;
     }
 
-    public static Location getPlayerSpawnLocation(OfflinePlayer player){
-        if(OurTown.instance == null)return null;
+    public static Location getPlayerSpawnLocation(OfflinePlayer player) {
+        if (OurTown.instance == null) return null;
         return OurTown.instance.getPlayerSpawn(player).getLocation();
     }
 }
