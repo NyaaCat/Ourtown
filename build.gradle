@@ -2,8 +2,8 @@ apply plugin: "java-library"
 apply plugin: "maven-publish"
 
 ext.majorVersion = 8
-ext.minorVersion = 2
-ext.minecraftVersion = "1.18.2"
+ext.minorVersion = 4
+ext.minecraftVersion = "1.20.4"
 sourceCompatibility = 17
 targetCompatibility = 17
 
@@ -20,7 +20,7 @@ repositories {
     mavenCentral()
     maven { name 'Spigot'; url 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/' }
     maven { name 'Sonatype'; url 'https://oss.sonatype.org/content/groups/public' }
-    maven { name 'sk89q'; url 'https://maven.sk89q.com/artifactory/repo/' }
+    maven { name 'enginehub'; url 'https://maven.enginehub.org/repo/' }
     maven { name "essentialsx-releases"; url "https://repo.essentialsx.net/releases/" }
     maven { name "papermc"; url "https://papermc.io/repo/repository/maven-public/" }
     maven { name 'jitpack'; url 'https://jitpack.io' }
@@ -34,7 +34,7 @@ dependencies {
     compileOnly "org.spigotmc:spigot-api:$minecraftVersion-R0.1-SNAPSHOT"
 
     // other nyaa plugins
-    compileOnly('cat.nyaa:nyaacore:9.0-SNAPSHOT')
+    compileOnly('cat.nyaa:nyaacore:9.3.4-1.20.4')
     compileOnly('cat.nyaa:ecore:0.2.2')
 
 
