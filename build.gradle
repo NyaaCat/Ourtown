@@ -2,10 +2,10 @@ apply plugin: "java-library"
 apply plugin: "maven-publish"
 
 ext.majorVersion = 8
-ext.minorVersion = 4
-ext.minecraftVersion = "1.20.4"
-sourceCompatibility = 17
-targetCompatibility = 17
+ext.minorVersion = 5
+ext.minecraftVersion = "1.21.1"
+sourceCompatibility = 21
+targetCompatibility = 21
 
 // Suppiled by Jenkins
 ext.buildNumber = System.env.BUILD_NUMBER == null ? "x" : "$System.env.BUILD_NUMBER"
@@ -13,8 +13,8 @@ ext.mavenDirectory = System.env.MAVEN_DIR == null ? "$projectDir/repo" : "$Syste
 
 // Version used for distribution. Different from maven repo
 group = "cat.nyaa"
-archivesBaseName = "Ourtown-mc$minecraftVersion"
-version = "$majorVersion.$minorVersion.$buildNumber"
+archivesBaseName = "Ourtown"
+version = "$majorVersion.$minorVersion"
 
 repositories {
     mavenCentral()
@@ -34,12 +34,12 @@ dependencies {
     compileOnly "org.spigotmc:spigot-api:$minecraftVersion-R0.1-SNAPSHOT"
 
     // other nyaa plugins
-    compileOnly('cat.nyaa:nyaacore:9.3.4-1.20.4')
-    compileOnly('cat.nyaa:ecore:0.2.2')
+    compileOnly('cat.nyaa:nyaacore:9.4')
+    compileOnly('cat.nyaa:ecore:0.3.4')
 
 
     // 3rd party plugins
-    compileOnly('net.essentialsx:EssentialsX:2.19.3')
+    compileOnly('net.essentialsx:EssentialsX:2.20.1')
 
     // annotation processor
     annotationProcessor "org.spigotmc:spigot-api:$minecraftVersion-R0.1-SNAPSHOT"
@@ -65,7 +65,7 @@ publishing {
             artifact sourcesJar
             groupId "cat.nyaa"
             artifactId "ourtown"
-            version "$majorVersion.$minorVersion-SNAPSHOT"
+            version "$majorVersion.$minorVersion"
             from components.java
         }
     }
