@@ -3,7 +3,7 @@ version: ${version}
 main: cat.nyaa.ourtown.OurTown
 depend: [ NyaaCore,Essentials,ECore ]
 authors: [ cylin ]
-api-version: 1.13
+api-version: ${apiVersion}
 commands:
   town:
     description: "our town"

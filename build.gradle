@@ -2,10 +2,15 @@ apply plugin: "java-library"
 apply plugin: "maven-publish"
 
 ext.majorVersion = 8
-ext.minorVersion = 6
-ext.minecraftVersion = "1.21.11"
-sourceCompatibility = 21
-targetCompatibility = 21
+ext.minorVersion = 7
+// Paper coordinates for Minecraft/Pewpew 26.2, discovered from official metadata.
+ext.minecraftVersion = "26.2"
+ext.paperApiVersion = "26.2.build.123-stable"
+ext.pluginApiVersion = "26.2"
+
+java {
+    toolchain.languageVersion.set(JavaLanguageVersion.of(25))
+}
 
 // Suppiled by Jenkins
 ext.buildNumber = System.env.BUILD_NUMBER == null ? "x" : "$System.env.BUILD_NUMBER"
@@ -13,7 +18,10 @@ ext.mavenDirectory = System.env.MAVEN_DIR == null ? "$projectDir/repo" : "$Syste
 
 // Version used for distribution. Different from maven repo
 group = "cat.nyaa"
-archivesBaseName = "Ourtown"
+// Gradle 9 removed the project-level archivesBaseName property.
+base {
+    archivesName = "Ourtown"
+}
 version = "$majorVersion.$minorVersion"
 
 repositories {
@@ -28,14 +36,14 @@ repositories {
 }
 
 dependencies {
-    compileOnly 'org.jetbrains:annotations:22.0.0'
+    compileOnly 'org.jetbrains:annotations:26.1.0'
 
     // spigot
     // compileOnly "org.spigotmc:spigot-api:$minecraftVersion-R0.1-SNAPSHOT"
-    compileOnly "io.papermc.paper:paper-api:$minecraftVersion-R0.1-SNAPSHOT"
+    compileOnly "io.papermc.paper:paper-api:$paperApiVersion"
     // other nyaa plugins
-    compileOnly('cat.nyaa:nyaacore:9.10')
-    compileOnly('cat.nyaa:ecore:0.3.5')
+    compileOnly('cat.nyaa:nyaacore:9.12')
+    compileOnly('cat.nyaa:ecore:0.3.6')
 
 
     // 3rd party plugins
@@ -54,9 +62,14 @@ task javadocJar(type: Jar) {
     from javadoc
     archiveClassifier = 'javadoc'
 }
+compileJava {
+    options.encoding = 'UTF-8'
+    options.release.set(25)
+}
+
 processResources { // modify version string
     filesMatching("**/plugin.yml") {
-        expand 'version': project.version
+        expand 'version': project.version, 'apiVersion': project.pluginApiVersion
     }
 }
 publishing {
